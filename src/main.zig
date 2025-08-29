@@ -1,5 +1,4 @@
 const std = @import("std");
-const print = std.debug.print;
 const sqrt = std.math.sqrt;
 const pow = std.math.pow;
 const exp = std.math.exp;
@@ -130,7 +129,6 @@ fn color(t: float) [3]u8 {
     const c = vec3{ .x = 1.0, .y = 1.0, .z = 1.0 };
     const d = vec3{ .x = 0.3, .y = 0.2, .z = 0.2 };
     const result = a.add(b.mul(c.mulf(t).add(d).mulf(2.0 * PI).cosine()));
-    // print("result: {}\n", .{result});
 
     return .{
         @intFromFloat(255.0 * result.x),
@@ -195,19 +193,6 @@ pub fn main() !void {
         );
     }
     inline for (threads) |thread| thread.join();
-
-    // for (0..HEIGHT) |j| {
-    //     for (0..WIDTH) |i| {
-    //         const pixel = image.get(i, j) orelse @panic("Invalid index");
-    //         const frag_color = shade(.{
-    //             .x = @floatFromInt(i),
-    //             .y = @floatFromInt(j),
-    //         });
-    //         pixel[0] = frag_color[0];
-    //         pixel[1] = frag_color[1];
-    //         pixel[2] = frag_color[2];
-    //     }
-    // }
 
     var outfile = try std.fs.cwd().createFile("out.ppm", .{});
     defer outfile.close();
